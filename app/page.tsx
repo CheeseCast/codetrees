@@ -35,7 +35,7 @@ export default function Home() {
     if (error) {
       console.error('Error fetching user ID:', error);
     } else {
-      setUserId(data.user.id || null);
+      setUserId(data?.user.id || null);
     }
   }
 
@@ -94,10 +94,9 @@ export default function Home() {
       <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center space-x-2">
-            <CodeIcon className="h-6 w-6 text-primary" />
-            <span className="text-xl font-bold">Snippets</span>
+            <img src='logo.png' className="h-6 text-primary" />
           </div>
-          <div className="flex flex-1 items-center justify-between space-x-4 px-8">
+          <div className="flex flex-1 items-center space-x-4 px-8">
             <div className="relative flex-1 max-w-2xl">
               <SearchIcon className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
@@ -108,15 +107,15 @@ export default function Home() {
               />
             </div>
             <div className="flex items-center space-x-4">
-              <NewSnippetModal />
-              <UserNav />
+             <NewSnippetModal />
+             <UserNav />
             </div>
-          </div>
+        </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="container py-8">
+     {/* Main Content */}
+     <main className="container py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {loading ? (
             <p>Loading snippets...</p>

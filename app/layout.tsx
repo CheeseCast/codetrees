@@ -6,8 +6,8 @@ import { Providers } from './providers';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Snippets - Code Sharing Platform',
-  description: 'Share and discover code snippets',
+  title: 'Codetrees',
+  description: 'Share and discover code trees!',
 };
 
 export default function RootLayout({

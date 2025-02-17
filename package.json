@@ -72,6 +72,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/canvas-confetti": "^1.9.0",
     "@types/react-syntax-highlighter": "^15.5.13"
   }
 }

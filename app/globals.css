@@ -17,6 +17,10 @@
   margin-top: 20px;
 }
 
+.px-8 {
+  padding-right: 0px !important;
+}
+
 @media (min-width: 640px) {
   .container {
     padding: 0 1.5rem;

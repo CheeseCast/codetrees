@@ -10,6 +10,7 @@ import { UserNav } from './components/user-nav';
 import { supabase } from '@/lib/supabase';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import confetti from 'canvas-confetti';
 
 type Snippet = {
   id: string;
@@ -26,6 +27,7 @@ export default function Home() {
   const [snippets, setSnippets] = useState<Snippet[]>([]);
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState<string | null>(null);
+  const [copiedSnippetId, setCopiedSnippetId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchSnippets();
@@ -90,6 +92,19 @@ export default function Home() {
     snippet.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const handleCopy = (code: string, id: string, buttonElement: HTMLButtonElement) => {
+    navigator.clipboard.writeText(code);
+    const rect = buttonElement.getBoundingClientRect();
+    confetti({
+      origin: { x: rect.left / window.innerWidth, y: rect.top / window.innerHeight },
+      particleCount: 100,
+      spread: 70,
+      startVelocity: 30,
+    });
+    setCopiedSnippetId(id);
+    setTimeout(() => setCopiedSnippetId(null), 1000);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -152,9 +167,9 @@ export default function Home() {
                   <Button 
                     variant="secondary" 
                     size="sm"
-                    onClick={() => navigator.clipboard.writeText(snippet.code)}
+                    onClick={(e) => handleCopy(snippet.code, snippet.id, e.currentTarget)}
                   >
-                    Copy
+                    {copiedSnippetId === snippet.id ? 'Copied' : 'Copy'}
                   </Button>
                 </div>
               </Card>

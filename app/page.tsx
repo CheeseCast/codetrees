@@ -8,6 +8,8 @@ import { CodeIcon, SearchIcon, Trash2Icon } from 'lucide-react';
 import { NewSnippetModal } from './components/new-snippet-modal';
 import { UserNav } from './components/user-nav';
 import { supabase } from '@/lib/supabase';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 type Snippet = {
   id: string;
@@ -140,11 +142,9 @@ export default function Home() {
                 <p className="text-sm text-muted-foreground mb-4">
                   {snippet.description}
                 </p>
-                <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                  <code>
-                    {snippet.code}
-                  </code>
-                </pre>
+                <SyntaxHighlighter language={snippet.language.toLowerCase()} style={atomDark} className="rounded-lg text-sm overflow-x-auto">
+                  {snippet.code}
+                </SyntaxHighlighter>
                 <div className="mt-4 flex items-center justify-between">
                   <div className="flex items-center space-x-2">
                     <div className="text-sm text-muted-foreground">{snippet.language}</div>
